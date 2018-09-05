@@ -17,6 +17,8 @@ timestamps {
 
       stage('NPM Install') {
         container ('ng') {
+          sh "npm -v"
+          sh "node -v"
           sh "npm install --quiet"
         }        
       }
