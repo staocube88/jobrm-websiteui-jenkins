@@ -23,7 +23,8 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "test-ci": "ng test --single-run --no-progress --browser=HeadlessChrome --code-coverage"
   },
   "private": true,
   "dependencies": {

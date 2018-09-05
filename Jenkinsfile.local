@@ -7,7 +7,8 @@ timestamps {
     containers: [
       containerTemplate(name: 'docker', image: 'docker:18.06', command: 'cat', ttyEnabled: true),
       containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:v2.10.0', command: 'cat', ttyEnabled: true),
-      containerTemplate(name: 'ng', image: 'alexsuch/angular-cli:6.1.2', command: 'cat', ttyEnabled: true)
+      containerTemplate(name: 'ng', image: 'zenika/alpine-node:9', command: 'cat', ttyEnabled: true),
+      containerTemplate(name: 'chrome', image: 'zenika/alpine-chrome:68', command: 'cat', ttyEnabled: true),
     ]
   ) {
     node ('jenkins-pipeline') {
@@ -25,19 +26,19 @@ timestamps {
 
       stage('Code Formatting checks') {
         container ('ng') {
-          sh "ng lint --no-progress"
+          sh "npm run lint"
         }
       }
 
       stage('Build') {
         container ('ng') {
-          sh "ng build --no-progress"
+          sh "npm run build"
         }
       }
 
       stage('Run Unit Tests') {
         container ('ng') {
-          sh "ng test --single-run --no-progress --browser=HeadlessChrome --code-coverage"
+          sh "npm run test-ci"
         }
 
         junit 'test-results/**/*.xml'
