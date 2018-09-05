@@ -7,7 +7,7 @@ timestamps {
     containers: [
       containerTemplate(name: 'docker', image: 'docker:18.06', command: 'cat', ttyEnabled: true),
       containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:v2.10.0', command: 'cat', ttyEnabled: true),
-      containerTemplate(name: 'ng', image: 'alexsuch/angular-cli:6.1.2-chromium', command: 'cat', ttyEnabled: true)
+      containerTemplate(name: 'ng', image: 'alexsuch/angular-cli:6.1.2', command: 'cat', ttyEnabled: true)
     ]
   ) {
     node ('jenkins-pipeline') {
