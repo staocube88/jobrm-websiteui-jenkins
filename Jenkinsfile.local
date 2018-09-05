@@ -7,8 +7,7 @@ timestamps {
     containers: [
       containerTemplate(name: 'docker', image: 'docker:18.06', command: 'cat', ttyEnabled: true),
       containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:v2.10.0', command: 'cat', ttyEnabled: true),
-      containerTemplate(name: 'ng', image: 'zenika/alpine-node:9', command: 'cat', ttyEnabled: true),
-      containerTemplate(name: 'chrome', image: 'zenika/alpine-chrome:68', command: 'cat', ttyEnabled: true),
+      containerTemplate(name: 'node', image: 'zenika/alpine-chrome:68', command: 'cat', ttyEnabled: true),
     ]
   ) {
     node ('jenkins-pipeline') {
@@ -17,7 +16,7 @@ timestamps {
       }
 
       stage('NPM Install') {
-        container ('ng') {
+        container ('node') {
           sh "npm -v"
           sh "node -v"
           sh "npm install --quiet"
@@ -25,19 +24,19 @@ timestamps {
       }
 
       stage('Code Formatting checks') {
-        container ('ng') {
+        container ('node') {
           sh "npm run lint"
         }
       }
 
       stage('Build') {
-        container ('ng') {
+        container ('node') {
           sh "npm run build"
         }
       }
 
       stage('Run Unit Tests') {
-        container ('ng') {
+        container ('node') {
           sh "npm run test-ci"
         }
 
