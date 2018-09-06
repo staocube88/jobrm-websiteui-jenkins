@@ -21,44 +21,45 @@ timestamps {
         }        
       }
 
-      stage('Code Formatting checks') {
-        container ('chrome') {
-          sh "npm run lint"
-        }
-      }
+      // stage('Code Formatting checks') {
+      //   container ('chrome') {
+      //     sh "npm run lint"
+      //   }
+      // }
 
-      stage('Build') {
-        container ('chrome') {
-          sh "npm run build"
-        }
-      }
+      // stage('Build') {
+      //   container ('chrome') {
+      //     sh "npm run build"
+      //   }
+      // }
 
-      stage('Run Unit Tests') {
-        container ('chrome') {
-          sh "npm run test-ci"
-        }
+      // stage('Run Unit Tests') {
+      //   container ('chrome') {
+      //     sh "npm run test-ci"
+      //   }
 
-        junit 'test-results/**/*.xml'
-      }
+      //   junit 'test-results/**/*.xml'
+      // }
 
-      stage('Run Code Coverage') {
-        cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/cobertura.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
-      }
+      // stage('Run Code Coverage') {
+      //   cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/cobertura.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
+      // }
 
-      stage('Deploy Local') {
-        println "Building docker image"
+      // stage('Deploy Local') {
+      //   println "Building docker image"
 
-        sh "echo \$'FROM nginx:stable-alpine \nCOPY ./dist /usr/share/nginx/html \n' > Dockerfile"
+      //   sh "echo \$'FROM nginx:stable-alpine \nCOPY ./dist /usr/share/nginx/html \n' > Dockerfile"
 
-        container("docker") { sh "docker build -t jobrm:latest ." }
+      //   container("docker") { sh "docker build -t jobrm:latest ." }
 
-        container("helm") {
-          sh "helm upgrade --install --force jobrm-static ./charts/jobrm-static --set image.repository=jobrm --set image.tag=latest --set service.type=NodePort --set service.nodePort=31001" 
-        }
-      }
+      //   container("helm") {
+      //     sh "helm upgrade --install --force jobrm-static ./charts/jobrm-static --set image.repository=jobrm --set image.tag=latest --set service.type=NodePort --set service.nodePort=31001" 
+      //   }
+      // }
 
       stage('Run Integration Tests') {
         container ('chrome') {
+          sh "read"
           sh "npm run e2e-ci"
         }
 
