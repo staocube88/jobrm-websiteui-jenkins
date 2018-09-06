@@ -34,7 +34,7 @@ module.exports = function(config) {
       environment: 'dev'
     },
     reporters:
-      config.angularCli && config.angularCli.codeCoverage
+      config.buildWebpack && config.buildWebpack.options && config.buildWebpack.options.codeCoverage
         ? ['progress', 'junit', 'coverage-istanbul']
         : ['progress', 'kjhtml'],
     port: 9876,
