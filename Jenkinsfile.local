@@ -50,13 +50,13 @@ timestamps {
       stage('Deploy Local') {
         println "Building docker image"
 
-        // sh "echo \$'FROM nginx:stable-alpine \nCOPY ./dist /usr/share/nginx/html \n' > Dockerfile"
+        sh "echo \$'FROM nginx:stable-alpine \nCOPY ./dist /usr/share/nginx/html \n' > Dockerfile"
 
-        // container("docker") { sh "docker build -t jobrm:latest ." }
+        container("docker") { sh "docker build -t jobrm:latest ." }
 
-        // container("helm") {
-        //   sh "helm init && helm repo update && helm upgrade --install jobrm-static ./charts/jobrm-static --set image.repository=jobrm --set image.tag=latest --set service.type=NodePort" 
-        // }
+        container("helm") {
+          sh "helm upgrade --install jobrm-static ./charts/jobrm-static --set image.repository=jobrm --set image.tag=latest --set service.type=NodePort --set service.nodePort=34444" 
+        }
       }
 
       stage('Run Integration Tests') {
