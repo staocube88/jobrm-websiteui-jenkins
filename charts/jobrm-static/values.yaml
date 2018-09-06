@@ -1,11 +1,22 @@
+# Default values for jobrm2.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
 replicaCount: 1
 
 image:
   repository: jobrm
   tag: latest
-  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
 
 service:
   type: NodePort
   port: 80
   nodePort: 34444
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
