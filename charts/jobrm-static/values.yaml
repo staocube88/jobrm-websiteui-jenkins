@@ -14,7 +14,7 @@ fullnameOverride: ""
 service:
   type: NodePort
   port: 80
-  nodePort: 34444
+  nodePort: 31001
 
 resources: {}
 nodeSelector: {}
