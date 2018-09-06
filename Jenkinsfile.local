@@ -25,13 +25,13 @@ timestamps {
 
       stage('Code Formatting checks') {
         container ('chrome') {
-          sh "npm run lint"
+         // sh "npm run lint"
         }
       }
 
       stage('Build') {
         container ('chrome') {
-          sh "npm run build"
+          //sh "npm run build"
         }
       }
 
@@ -60,6 +60,11 @@ timestamps {
       }
 
       stage('Run Integration Tests') {
+        container ('chrome') {
+          sh "npm run e2e"
+        }
+
+        junit 'e2e/test-results/**/*.xml'
       }
 
       stage('Deploy Production') {
