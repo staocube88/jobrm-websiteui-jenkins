@@ -119,6 +119,11 @@
           "options": {
             "protractorConfig": "./protractor.conf.js",
             "devServerTarget": "ng:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": ""
+            }
           }
         },
         "lint": {

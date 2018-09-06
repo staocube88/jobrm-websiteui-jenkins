@@ -17,8 +17,6 @@ timestamps {
 
       stage('NPM Install') {
         container ('chrome') {
-          sh "npm -v"
-          sh "node -v"
           sh "npm install --quiet"
         }        
       }
@@ -61,7 +59,7 @@ timestamps {
 
       stage('Run Integration Tests') {
         container ('chrome') {
-          sh "npm run e2e"
+          sh "npm run e2e-ci"
         }
 
         junit 'e2e/test-results/**/*.xml'
