@@ -8,7 +8,7 @@ timestamps {
       containerTemplate(name: 'docker', image: 'docker:18.06', command: 'cat', ttyEnabled: true),
       containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:v2.10.0', command: 'cat', ttyEnabled: true),
       containerTemplate(name: 'chrome', image: 'garunski/alpine-chrome:latest', command: 'cat', ttyEnabled: true),
-      containerTemplate(name: 'node', image: 'garunski/alpine-node:latest', command: 'cat', ttyEnabled: true),
+      containerTemplate(name: 'node', image: 'zenika/alpine-node:latest', command: 'cat', ttyEnabled: true),
       containerTemplate(name: 'selenium', image: 'selenium/standalone-chrome:3.14', command: '', ttyEnabled: false, ports: [portMapping(containerPort: 4444)]),
     ]
   ) {
