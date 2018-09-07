@@ -19,7 +19,7 @@ exports.config = {
     }
   },
   directConnect: true,
-  seleniumAddress: "http://selenium:4444/wd/hub"
+  seleniumAddress: 'http://selenium:4444/wd/hub',
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
@@ -41,6 +41,5 @@ exports.config = {
       consolidateAll: false
     });
     jasmine.getEnv().addReporter(junitReporter);
-
   }
 };
