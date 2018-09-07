@@ -9,7 +9,7 @@ timestamps {
       containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:v2.10.0', command: 'cat', ttyEnabled: true),
       containerTemplate(name: 'chrome', image: 'garunski/alpine-chrome:latest', command: 'ash', ttyEnabled: true),
       containerTemplate(name: 'selenium', image: 'selenium/standalone-chrome:latest', command: '', ttyEnabled: false, 
-        ports: [portMapping(containerPort: 4444, hostPort: 4444)]),
+        ports: [portMapping(containerPort: 4444)]),
     ]
   ) {
     node ('jenkins-pipeline') {
