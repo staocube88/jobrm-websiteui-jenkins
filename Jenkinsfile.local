@@ -29,7 +29,9 @@ timestamps {
         stage('Build') {
           sh 'npm run build'
         }
+      }
 
+      container('selenium') {
         stage('Run Unit Tests') {
           sh 'npm run test-ci'
           junit 'test-results/**/*.xml'
