@@ -8,7 +8,6 @@ timestamps {
       containerTemplate(name: 'docker', image: 'docker:18.06', command: 'cat', ttyEnabled: true),
       containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:v2.10.0', command: 'cat', ttyEnabled: true),
       containerTemplate(name: 'chrome', image: 'garunski/alpine-chrome:latest', command: 'cat', ttyEnabled: true),
-      containerTemplate(name: 'node', image: 'zenika/alpine-node:latest', command: 'cat', ttyEnabled: true),
       containerTemplate(name: 'selenium', image: 'selenium/standalone-chrome:3.14', command: '', ttyEnabled: false, ports: [portMapping(containerPort: 4444)]),
     ]
   ) {
@@ -29,9 +28,7 @@ timestamps {
         stage('Build') {
           sh 'npm run build'
         }
-      }
 
-      container('selenium') {
         stage('Run Unit Tests') {
           sh 'npm run test-ci'
           junit 'test-results/**/*.xml'
@@ -56,7 +53,7 @@ timestamps {
       } //end deploy local
 
       stage('Run Integration Tests') {
-        container ('node') {
+        container ('chrome') {
           sh 'npm run e2e-ci'
         }
 
