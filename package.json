@@ -1,22 +1,7 @@
 {
-  "name": "@coreui/coreui-free-angular-admin-template",
-  "version": "2.0.0",
+  "name": "@jobrm/websiteui",
+  "version": "1.0.0",
   "description": "CoreUI Free Angular 2+ Admin Template",
-  "author": {
-    "name": "Łukasz Holeczek",
-    "url": "http://holeczek.pl",
-    "github": "https://github.com/mrholek",
-    "twitter": "https://twitter.com/lukaszholeczek"
-  },
-  "contributors": [
-    {
-      "name": "Andrzej Kopański",
-      "url": "https://github.com/xidedix"
-    }
-  ],
-  "homepage": "https://coreui.io/angular",
-  "copyright": "Copyright 2018 creativeLabs Łukasz Holeczek",
-  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,8 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "e2e-ci": "ng e2e --prod --base-url http://jobrm-static:80",
-    "test-ci": "ng test --no-progress --watch=false --browsers=ChromeHeadless --code-coverage "
+    "test-ci": "ng test --no-progress --watch=false --browsers=ChromeHeadless --code-coverage",
+    "e2e-ci": "ng e2e --prod --base-url http://jobrm-static:80 --protractor-config ./protractor.local.conf.js"
   },
   "private": true,
   "dependencies": {
