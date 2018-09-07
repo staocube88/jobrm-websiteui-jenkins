@@ -24,7 +24,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "e2e-ci": "ng e2e --prod --base-url http://localhost:31001",
+    "e2e-ci": "ng e2e --prod --base-url http://jobrm-static:80",
     "test-ci": "ng test --no-progress --watch=false --browsers=ChromeHeadless --code-coverage "
   },
   "private": true,

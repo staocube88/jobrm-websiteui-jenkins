@@ -61,7 +61,6 @@ timestamps {
 
       stage('Run Integration Tests') {
         container ('chrome') {
-          sh "read"
           sh "npm run e2e-ci"
         }
 
