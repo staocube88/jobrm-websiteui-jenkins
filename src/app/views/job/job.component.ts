@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
   selector: 'app-job',
@@ -6,10 +8,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./job.component.scss']
 })
 export class JobComponent implements OnInit {
+  form = new FormGroup({});
 
-  constructor() { }
+  model = { email: 'email@gmail.com' };
 
-  ngOnInit() {
+  fields: FormlyFieldConfig[] = [
+    {
+      key: 'email',
+      type: 'input',
+      templateOptions: {
+        type: 'email',
+        label: 'Email address',
+        placeholder: 'Enter email',
+        required: true
+      }
+    }
+  ];
+
+  submit(model) {
+    console.log(model);
   }
 
+  constructor() {}
+
+  ngOnInit() {}
 }
