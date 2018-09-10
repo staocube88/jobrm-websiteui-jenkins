@@ -48,10 +48,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {}
 
   addNew(): void {
-    this.router.navigate(['pages/jobs/new']);
+    this.router.navigate(['job/new']);
   }
 
   rowSelect(event: any): void {
-    this.router.navigate(['pages/jobs/edit', event.data.id]);
+    this.router.navigate(['job/edit', event.data.id]);
   }
 }
