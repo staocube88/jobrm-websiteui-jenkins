@@ -41,6 +41,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { validationMessages } from './formly.messages';
 
 @NgModule({
   imports: [
@@ -57,7 +58,9 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
     ChartsModule,
     ReactiveFormsModule,
     FormsModule,
-    FormlyModule.forRoot(),
+    FormlyModule.forRoot({
+      validationMessages: validationMessages,
+    }),
     FormlyBootstrapModule
   ],
   declarations: [

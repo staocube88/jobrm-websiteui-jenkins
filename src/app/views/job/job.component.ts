@@ -10,17 +10,28 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 export class JobComponent implements OnInit {
   form = new FormGroup({});
 
-  model = { email: 'email@gmail.com' };
+  model = { title: 'Something Something Darkside' };
 
   fields: FormlyFieldConfig[] = [
     {
-      key: 'email',
+      key: 'title',
       type: 'input',
       templateOptions: {
-        type: 'email',
-        label: 'Email address',
-        placeholder: 'Enter email',
+        type: 'text',
+        label: 'Title',
+        placeholder: 'Enter Title',
         required: true
+      }
+    },
+    {
+      key: 'company',
+      type: 'input',
+      templateOptions: {
+        type: 'text',
+        label: 'Company',
+        placeholder: 'Enter Company',
+        required: true,
+        maxLength: 15
       }
     }
   ];
