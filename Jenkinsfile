@@ -26,7 +26,7 @@ pipeline {
                     container {
                         name 'selenium'
                         image 'selenium/standalone-chrome:3.14'
-                        command ''
+                        command 'chromedriver --port=4444'
                         ttyEnabled false
                         ports '4444:4444'
                     }
