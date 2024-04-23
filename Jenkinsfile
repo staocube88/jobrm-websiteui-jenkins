@@ -26,7 +26,10 @@ pipeline {
                         image 'selenium/standalone-chrome:3.14'
                         command 'chromedriver --port=4444'
                         ttyEnabled false
-                        ports '4444:4444'
+                        ports ([
+                              containerPort: 4444
+                              hostPort: 4444
+                        ])
                     }
                 }
             }
