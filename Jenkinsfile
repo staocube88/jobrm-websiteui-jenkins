@@ -34,7 +34,6 @@ pipeline {
             }
         }
     }
-}
     stages {
         stage('Get latest version of code') {
             steps {
