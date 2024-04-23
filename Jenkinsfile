@@ -8,19 +8,19 @@ pipeline {
                     container {
                         name 'docker'
                         image 'docker:18.06'
-                        command 'cat'
+                        command 'sleep infinity'
                         ttyEnabled true
                     }
                     container {
                         name 'helm'
                         image 'lachlanevenson/k8s-helm:v2.10.0'
-                        command 'cat'
+                        command 'sleep infinity'
                         ttyEnabled true
                     }
                     container {
                         name 'chrome'
                         image 'garunski/alpine-chrome:latest'
-                        command 'cat'
+                        command 'sleep infinity'
                         ttyEnabled true
                     }
                     container {
@@ -34,6 +34,7 @@ pipeline {
             }
         }
     }
+}
     stages {
         stage('Get latest version of code') {
             steps {
