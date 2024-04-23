@@ -4,26 +4,24 @@ pipeline {
             cloud 'kubernetes'
             namespace 'default'
             containerTemplate {
-                containers {
-                    container {
                         name 'docker'
                         image 'docker:18.06'
                         command 'sleep infinity'
                         ttyEnabled true
                     }
-                    container {
+                    containerTemplate {
                         name 'helm'
                         image 'lachlanevenson/k8s-helm:v2.10.0'
                         command 'sleep infinity'
                         ttyEnabled true
                     }
-                    container {
+                    containerTemplate {
                         name 'chrome'
                         image 'garunski/alpine-chrome:latest'
                         command 'sleep infinity'
                         ttyEnabled true
                     }
-                    container {
+                    containerTemplate {
                         name 'selenium'
                         image 'selenium/standalone-chrome:3.14'
                         command 'chromedriver --port=4444'
@@ -32,8 +30,6 @@ pipeline {
                     }
                 }
             }
-        }
-    }
     stages {
         stage('Get latest version of code') {
             steps {
