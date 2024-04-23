@@ -1,39 +1,44 @@
 #!/usr/bin/groovy
 
-timestamps { 
-  podTemplate(
-    label: 'jenkins-pipeline', 
-    inheritFrom: 'default',
-    containers: [
-      containerTemplate(name: 'docker', image: 'docker:18.06', command: 'cat', ttyEnabled: true),
-      containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:v2.10.0', command: 'cat', ttyEnabled: true),
-      containerTemplate(name: 'chrome', image: 'garunski/alpine-chrome:latest', command: 'cat', ttyEnabled: true),
-      containerTemplate(name: 'selenium', image: 'selenium/standalone-chrome:3.14', command: '', ttyEnabled: false, ports: [portMapping(containerPort: 4444)]),
-    ]
-  ) {
-    node ('jenkins-pipeline') {
-      stage('Get latest version of code') {
-        checkout scm
-      }
+pipeline {
+    agent any
 
-      container ('chrome') {
-        stage('Install Packages') {
-          sh 'npm install --quiet'
-        }
+    stages {
+        stage('Build and Test') {
+            steps {
+                timestamps {
+                    podTemplate(
+                        label: 'jenkins-pipeline', 
+                        inheritFrom: 'default',
+                        containers: [
+                            containerTemplate(name: 'docker', image: 'docker:18.06', command: 'cat', ttyEnabled: true),
+                            containerTemplate(name: 'helm', image: 'lachlanevenson/k8s-helm:v2.10.0', command: 'cat', ttyEnabled: true),
+                            containerTemplate(name: 'chrome', image: 'garunski/alpine-chrome:latest', command: 'cat', ttyEnabled: true),
+                            containerTemplate(name: 'selenium', image: 'selenium/standalone-chrome:3.14', command: '', ttyEnabled: false, ports: [portMapping(containerPort: 4444)]),
+                        ]
+                    ) {
+                        node('jenkins-pipeline') {
+                            stage('Get latest version of code') {
+                                checkout scm
+                            }
 
-        stage('Code Formatting checks') {
-          sh 'npm run lint'
-        }
+                            container('chrome') {
+                                stage('Install Packages') {
+                                    sh 'npm install --quiet'
+                                }
 
-        stage('Build') {
-          sh 'npm run build'
-        }
+                                stage('Code Formatting checks') {
+                                    sh 'npm run lint'
+                                }
 
-        stage('Run Unit Tests') {
-          sh 'npm run test-ci'
-          junit 'test-results/**/*.xml'
-        }
-      } //end container chrome
+                                stage('Build') {
+                                    sh 'npm run build'
+                                }
+
+                                stage('Run Unit Tests') {
+                                    sh 'npm run test-ci'
+                                    junit 'test-results/**/*.xml'
+                                }
 
       stage('Run Code Coverage') {
         cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/cobertura.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
@@ -65,5 +70,10 @@ timestamps {
       stage('Run Post Deployment Tests') {
       }
     } // end node
-  } // end podTemplate
-} // end timestamps
+                    } // end podTemplate
+                } // end timestamps
+            }
+        }
+    }
+}
+}
