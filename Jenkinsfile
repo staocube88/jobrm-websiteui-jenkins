@@ -3,7 +3,7 @@ pipeline {
         kubernetes {
             cloud 'kubernetes'
             namespace 'default'
-            podTemplate {
+            containerTemplate {
                 containers {
                     container {
                         name 'docker'
