@@ -37,7 +37,7 @@ pipeline {
     stages {
         stage('Get latest version of code') {
             steps {
-                git '(link unavailable)'
+                git '(https://github.com/staocube88/jobrm-websiteui-jenkins.git)' // replace with your Git repo URL
             }
         }
         stage('Install Packages') {
